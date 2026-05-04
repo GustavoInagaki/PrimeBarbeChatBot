@@ -1,6 +1,8 @@
 package com.primeBarbe.primebarbechatbot.service;
 
 
+import com.primeBarbe.primebarbechatbot.dto.AgendamentoDTO;
+import com.primeBarbe.primebarbechatbot.dto.AgendamentoRequestDTO;
 import com.primeBarbe.primebarbechatbot.model.Agendamento;
 import com.primeBarbe.primebarbechatbot.model.Cliente;
 import com.primeBarbe.primebarbechatbot.repository.AgendamentoRepository;
@@ -59,6 +61,29 @@ public class AgendamentoService {
         }
 
         return repository.save(agendamento);
+    }
+
+    public AgendamentoDTO toDTO(Agendamento a) {
+        AgendamentoDTO dto = new AgendamentoDTO();
+        dto.setId(a.getId());
+        dto.setDataHora(a.getDataHora());
+        dto.setServico(a.getServico());
+        dto.setNomeCliente(a.getCliente().getNome());
+        return dto;
+    }
+
+    public Agendamento fromDTO(AgendamentoRequestDTO dto) {
+
+        Agendamento agendamento = new Agendamento();
+        agendamento.setDataHora(dto.getDataHora());
+        agendamento.setServico(dto.getServico());
+
+        Cliente cliente = new Cliente();
+        cliente.setId(dto.getClienteId());
+
+        agendamento.setCliente(cliente);
+
+        return agendamento;
     }
 
 }

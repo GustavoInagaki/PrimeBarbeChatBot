@@ -1,164 +1,113 @@
 # 💈 PrimeBarbeChatBot
 
-API de agendamento para barbearia desenvolvida em Java com Spring Boot, com simulação de chatbot e controle inteligente de horários.
+API de agendamento para barbearia com chatbot inteligente, desenvolvida em **Java + Spring Boot**.
 
 ---
 
-## 🚀 Sobre o projeto
+##  Sobre o projeto
 
-O **PrimeBarbeChatBot** é uma API REST que permite:
+O **PrimeBarbeChatBot** é uma API que simula um sistema real de agendamento de clientes, permitindo:
 
 * Cadastro de clientes
-* criação de agendamentos
+* Criação de agendamentos
 * Controle de conflitos de horário
 * Consulta de horários disponíveis
-* Simulação de chatbot para interação com o usuário
-
-O projeto foi desenvolvido com foco em **boas práticas de backend**, arquitetura em camadas e regras de negócio reais.
+* Interação via chatbot (linguagem natural)
 
 ---
 
-## 🧠 Funcionalidades
+##  Funcionalidades
 
-### 👤 Cliente
-
-* Criar cliente
-* Listar clientes
-
-### 📅 Agendamento
+###  Agendamentos
 
 * Criar agendamento
 * Listar agendamentos
-* Validação de conflito de horário
+* Evitar conflitos de horário
+* Sugerir horários disponíveis automaticamente
 
-### ⏰ Horários disponíveis
+###  Chatbot
 
-* Consulta de horários livres por data
+* Entende frases como:
 
-### 🤖 Chatbot (em evolução)
-
-* Simulação de atendimento via texto
-* Sugestão de horários disponíveis
+    * "Quero agendar dia 2026-05-05 às 15:00"
+    * "Quero agendar amanhã de manhã"
+* Sugere horários disponíveis
+* Confirma agendamentos
 
 ---
 
-## 🛠️ Tecnologias utilizadas
+## ⚙ Tecnologias utilizadas
 
 * Java 17+
 * Spring Boot
+* Spring Web
 * Spring Data JPA
-* Hibernate
-* Banco H2 (em memória)
+* H2 Database
 * Maven
 
 ---
 
-## 📁 Estrutura do projeto
+##  Arquitetura
 
-```
-controller   → Endpoints da API  
-service      → Regras de negócio  
-repository   → Acesso ao banco  
-model        → Entidades  
-chatbot      → Simulação de atendimento  
-```
+* Controller → entrada da API
+* Service → regras de negócio
+* Repository → acesso ao banco
+* DTO → controle de dados
+* Exception Handler → tratamento global de erros
 
 ---
 
-## 🔥 Endpoints principais
+##  Diferenciais do projeto
 
-### 👤 Clientes
+* Uso de DTO (entrada e saída)
+* Validação com `@Valid`
+* Tratamento global de exceções
+* API REST com status HTTP corretos
+* Chatbot com interpretação de linguagem natural
 
-**Criar cliente**
+---
 
-```
-POST /clientes
-```
+##  Exemplos de uso
 
+### Criar agendamento
+
+### POST /agendamentos
 ```json
 {
-  "nome": "Gustavo",
-  "telefone": "99999-9999"
-}
-```
-
----
-
-**Listar clientes**
-
-```
-GET /clientes
-```
-
----
-
-### 📅 Agendamentos
-
-**Criar agendamento**
-
-```
-POST /agendamentos
-```
-
-```json
-{
-  "dataHora": "2026-04-20T14:00:00",
+  "dataHora": "2026-05-05T15:00:00",
   "servico": "Corte de cabelo",
-  "cliente": {
-    "id": 1
-  }
+  "clienteId": 1
 }
 ```
-
+D
 ---
 
-**Listar agendamentos**
+### Chatbot
 
 ```
-GET /agendamentos
+POST /chat
+
+Quero agendar amanhã de manhã
+```
+
+Resposta:
+
+```
+Beleza! Tenho esses horários disponíveis amanhã de manhã:
+09:00, 10:00, 11:00 😄
 ```
 
 ---
 
-### ⏰ Horários disponíveis
+##  Próximas melhorias
 
-```
-GET /agendamentos/disponiveis?data=2026-04-20
-```
-
-Retorna os horários livres para a data informada.
-
----
-
-## 🧠 Regras de negócio
-
-* Não é permitido dois agendamentos no mesmo horário
-* Cada agendamento está vinculado a um cliente
-* Os horários disponíveis são calculados dinamicamente
+* Integração com banco MySQL
+* Criação de frontend (React ou Mobile)
+* Uso de IA para melhorar o chatbot
+* Autenticação de usuários
 
 ---
 
-## 🎯 Objetivo do projeto
-
-Este projeto foi desenvolvido com o objetivo de:
-
-* Praticar desenvolvimento backend com Java
-* Aplicar conceitos de APIs REST
-* Trabalhar com banco de dados e ORM
-* Simular um sistema real de agendamento
-
----
-
-## 🚀 Próximas melhorias
-
-* Melhorar tratamento de erros (HTTP 400/404)
-* Implementar chatbot mais inteligente
-* Permitir agendamento direto via chatbot
-* Integração com banco de dados MySQL
-* Criar interface frontend
-
----
-
-## 👨‍💻 Autor
+##  Autor
 
 Desenvolvido por **Gustavo Inagaki**
