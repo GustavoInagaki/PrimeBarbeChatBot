@@ -9,7 +9,7 @@ API de agendamento para barbearia desenvolvida em Java com Spring Boot, com simu
 O **PrimeBarbeChatBot** é uma API REST que permite:
 
 * Cadastro de clientes
-* Criação de agendamentos
+* criação de agendamentos
 * Controle de conflitos de horário
 * Consulta de horários disponíveis
 * Simulação de chatbot para interação com o usuário
