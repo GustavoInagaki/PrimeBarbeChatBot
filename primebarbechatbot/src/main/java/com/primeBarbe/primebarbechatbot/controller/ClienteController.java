@@ -1,10 +1,15 @@
 package com.primeBarbe.primebarbechatbot.controller;
 
-
+import com.primeBarbe.primebarbechatbot.dto.ClienteRequestDTO;
 import com.primeBarbe.primebarbechatbot.model.Cliente;
 import com.primeBarbe.primebarbechatbot.service.ClienteService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -12,18 +17,24 @@ import java.util.List;
 @RequestMapping("/clientes")
 public class ClienteController {
 
-    @Autowired
-    private ClienteService service;
+    private final ClienteService service;
+
+    public ClienteController(ClienteService service) {
+        this.service = service;
+    }
 
     @PostMapping
-    public Cliente criarCliente(@RequestBody Cliente cliente){
+    public Cliente criarCliente(@RequestBody @Valid ClienteRequestDTO request) {
+        return service.salvar(request);
+    }
 
-        return service.salvar(cliente);
-
+    @GetMapping(params = "telefone")
+    public Cliente buscarPorTelefone(@RequestParam String telefone) {
+        return service.buscarPorTelefone(telefone);
     }
 
     @GetMapping
-    public List<Cliente> listarClientes(){
+    public List<Cliente> listarClientes() {
         return service.listarTodos();
     }
 }

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrimeBarbe</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<main class="app-shell">
+    <section class="booking-panel" aria-labelledby="booking-title">
+        <div class="brand-row">
+            <div>
+                <p class="eyebrow">PrimeBarbe</p>
+                <h1 id="booking-title">Agende seu horario</h1>
+            </div>
+            <span class="status-pill">Online</span>
+        </div>
+
+        <form id="bookingForm" class="booking-form">
+            <label>
+                Nome
+                <input id="nomeCliente" name="nomeCliente" type="text" autocomplete="name" placeholder="Seu nome" required>
+            </label>
+
+            <label>
+                Telefone com DDD
+                <input id="telefoneCliente" name="telefoneCliente" type="tel" autocomplete="tel" placeholder="11999999999" required>
+            </label>
+
+            <label>
+                Servico
+                <select id="servico" name="servico" required>
+                    <option value="Corte de cabelo">Corte de cabelo</option>
+                    <option value="Barba">Barba</option>
+                    <option value="Corte + barba">Corte + barba</option>
+                    <option value="Sobrancelha">Sobrancelha</option>
+                </select>
+            </label>
+
+            <label>
+                Data
+                <input id="data" name="data" type="date" required>
+            </label>
+
+            <fieldset>
+                <legend>Horarios disponiveis</legend>
+                <div id="horarios" class="time-grid" aria-live="polite"></div>
+            </fieldset>
+
+            <input id="dataHora" name="dataHora" type="hidden" required>
+
+            <button id="submitButton" type="submit">Confirmar agendamento</button>
+            <p id="feedback" class="feedback" role="status"></p>
+        </form>
+    </section>
+
+    <aside class="assistant-panel" aria-labelledby="assistant-title">
+        <h2 id="assistant-title">Atendimento WhatsApp/IA</h2>
+        <p>O atendimento por conversa ja esta preparado em modo mock para evoluir para WhatsApp Cloud API e IA.</p>
+
+        <form id="chatForm" class="chat-form">
+            <label>
+                Telefone
+                <input id="chatTelefone" type="tel" placeholder="11999999999" required>
+            </label>
+            <label>
+                Mensagem
+                <textarea id="chatMensagem" rows="4" placeholder="Quero agendar dia 2026-05-05 as 15:00" required></textarea>
+            </label>
+            <button type="submit">Testar conversa</button>
+        </form>
+
+        <div id="chatResposta" class="chat-response" aria-live="polite"></div>
+    </aside>
+</main>
+
+<script src="/app.js"></script>
+</body>
+</html>

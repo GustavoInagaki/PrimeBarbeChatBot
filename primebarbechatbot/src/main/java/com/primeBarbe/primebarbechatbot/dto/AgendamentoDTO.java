@@ -8,6 +8,7 @@ public class AgendamentoDTO {
     private LocalDateTime dataHora;
     private String servico;
     private String nomeCliente;
+    private String telefoneCliente;
 
     public Long getId() {
         return id;
@@ -39,5 +40,13 @@ public class AgendamentoDTO {
 
     public void setNomeCliente(String nomeCliente) {
         this.nomeCliente = nomeCliente;
+    }
+
+    public String getTelefoneCliente() {
+        return telefoneCliente;
+    }
+
+    public void setTelefoneCliente(String telefoneCliente) {
+        this.telefoneCliente = telefoneCliente;
     }
 }

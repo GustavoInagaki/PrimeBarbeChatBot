@@ -1,113 +1,129 @@
-# 💈 PrimeBarbeChatBot
+# PrimeBarbeChatBot
 
-API de agendamento para barbearia com chatbot inteligente, desenvolvida em **Java + Spring Boot**.
+Site e API de agendamento para barbearia com atendimento preparado para WhatsApp/IA em modo mock.
 
----
+## Sobre o projeto
 
-##  Sobre o projeto
+O PrimeBarbeChatBot permite que clientes marquem horarios por uma interface web responsiva ou testem um fluxo de conversa simulado. O telefone e a identidade principal do cliente, o que facilita a futura integracao com WhatsApp.
 
-O **PrimeBarbeChatBot** é uma API que simula um sistema real de agendamento de clientes, permitindo:
+## Funcionalidades
 
-* Cadastro de clientes
-* Criação de agendamentos
-* Controle de conflitos de horário
-* Consulta de horários disponíveis
-* Interação via chatbot (linguagem natural)
+- Cadastro e atualizacao de cliente por telefone.
+- Criacao de agendamentos.
+- Consulta de horarios disponiveis.
+- Bloqueio de conflito de horario na aplicacao e no banco.
+- Horario de funcionamento das 09:00 as 18:00, com 12:00 reservado para almoco.
+- Chat deterministico para consultas e agendamentos.
+- Endpoint mock para webhook de WhatsApp.
+- Site responsivo servido pelo proprio Spring Boot.
 
----
+## Tecnologias
 
-##  Funcionalidades
+- Java 21
+- Spring Boot
+- Spring Web MVC
+- Spring Data JPA
+- H2 Database
+- Bean Validation
+- Maven
+- HTML, CSS e JavaScript
 
-###  Agendamentos
+## Como usar
 
-* Criar agendamento
-* Listar agendamentos
-* Evitar conflitos de horário
-* Sugerir horários disponíveis automaticamente
+Entre na pasta do projeto Spring:
 
-###  Chatbot
+```bash
+cd primebarbechatbot
+```
 
-* Entende frases como:
+Execute a aplicacao:
 
-    * "Quero agendar dia 2026-05-05 às 15:00"
-    * "Quero agendar amanhã de manhã"
-* Sugere horários disponíveis
-* Confirma agendamentos
+```bash
+./mvnw spring-boot:run
+```
 
----
+No Windows:
 
-## ⚙ Tecnologias utilizadas
+```bat
+mvnw.cmd spring-boot:run
+```
 
-* Java 17+
-* Spring Boot
-* Spring Web
-* Spring Data JPA
-* H2 Database
-* Maven
+Depois acesse:
 
----
+```text
+http://localhost:8080
+```
 
-##  Arquitetura
+## Exemplos de API
 
-* Controller → entrada da API
-* Service → regras de negócio
-* Repository → acesso ao banco
-* DTO → controle de dados
-* Exception Handler → tratamento global de erros
+### Criar cliente
 
----
+```http
+POST /clientes
+Content-Type: application/json
+```
 
-##  Diferenciais do projeto
-
-* Uso de DTO (entrada e saída)
-* Validação com `@Valid`
-* Tratamento global de exceções
-* API REST com status HTTP corretos
-* Chatbot com interpretação de linguagem natural
-
----
-
-##  Exemplos de uso
+```json
+{
+  "nome": "Gustavo",
+  "telefone": "11999999999"
+}
+```
 
 ### Criar agendamento
 
-### POST /agendamentos
+```http
+POST /agendamentos
+Content-Type: application/json
+```
+
 ```json
 {
-  "dataHora": "2026-05-05T15:00:00",
+  "dataHora": "2026-05-07T15:00:00",
   "servico": "Corte de cabelo",
-  "clienteId": 1
+  "telefoneCliente": "11999999999",
+  "nomeCliente": "Gustavo"
 }
 ```
-D
----
 
-### Chatbot
+### Consultar horarios disponiveis
 
+```http
+GET /agendamentos/disponiveis?data=2026-05-07
 ```
+
+### Chat simples
+
+```http
 POST /chat
-
-Quero agendar amanhã de manhã
+Content-Type: application/json
 ```
 
-Resposta:
-
+```json
+{
+  "telefone": "11999999999",
+  "mensagem": "Quero agendar dia 2026-05-07 as 15:00"
+}
 ```
-Beleza! Tenho esses horários disponíveis amanhã de manhã:
-09:00, 10:00, 11:00 😄
+
+### WhatsApp mock
+
+```http
+POST /webhooks/whatsapp/mock
+Content-Type: application/json
 ```
 
----
+```json
+{
+  "telefone": "11999999999",
+  "mensagem": "Quais horarios amanha de manha?"
+}
+```
 
-##  Próximas melhorias
+## Proximos passos
 
-* Integração com banco MySQL
-* Criação de frontend (React ou Mobile)
-* Uso de IA para melhorar o chatbot
-* Autenticação de usuários
-
----
-
-##  Autor
-
-Desenvolvido por **Gustavo Inagaki**
+- Integrar WhatsApp Cloud API.
+- Trocar o chat deterministico por um provedor de IA.
+- Migrar H2 para MySQL ou PostgreSQL.
+- Criar painel administrativo para a barbearia.
+- Adicionar escolha de barbeiro.

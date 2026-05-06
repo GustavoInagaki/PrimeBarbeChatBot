@@ -1,22 +1,24 @@
 package com.primeBarbe.primebarbechatbot.dto;
 
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 
 public class AgendamentoRequestDTO {
 
-    @NotNull(message = "Data e hora são obrigatórias")
+    @NotNull(message = "Data e hora sao obrigatorias")
     @Future(message = "A data deve ser no futuro")
     private LocalDateTime dataHora;
 
-    @NotBlank(message = "Serviço é obrigatório")
+    @NotBlank(message = "Servico e obrigatorio")
     private String servico;
 
-    @NotNull(message = "Cliente é obrigatório")
-    private Long clienteId;
+    @NotBlank(message = "Telefone do cliente e obrigatorio")
+    private String telefoneCliente;
+
+    private String nomeCliente;
 
     public LocalDateTime getDataHora() {
         return dataHora;
@@ -34,11 +36,19 @@ public class AgendamentoRequestDTO {
         this.servico = servico;
     }
 
-    public Long getClienteId() {
-        return clienteId;
+    public String getTelefoneCliente() {
+        return telefoneCliente;
     }
 
-    public void setClienteId(Long clienteId) {
-        this.clienteId = clienteId;
+    public void setTelefoneCliente(String telefoneCliente) {
+        this.telefoneCliente = telefoneCliente;
+    }
+
+    public String getNomeCliente() {
+        return nomeCliente;
+    }
+
+    public void setNomeCliente(String nomeCliente) {
+        this.nomeCliente = nomeCliente;
     }
 }
